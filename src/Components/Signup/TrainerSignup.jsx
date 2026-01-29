@@ -214,7 +214,7 @@ const TrainerSignup = () => {
 
                         <div>
                             <label className="block text-sm font-medium text-gray-300">
-                                Monthly Fee ($)
+                                Monthly Fee (Rs.)
                             </label>
                             <input
                                 type="number"
@@ -240,7 +240,34 @@ const TrainerSignup = () => {
                             />
                         </div>
 
-                        
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-300">
+                                Certifications
+                            </label>
+                            <textarea
+                                name="certification"
+                                value={formData.certification}
+                                onChange={handleChange}
+                                rows="3"
+                                className="mt-1 block w-full bg-gray-700/50 border border-gray-600 rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                required
+                            />
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-300">
+                                Availability
+                            </label>
+                            <textarea
+                                name="availability"
+                                value={formData.availability}
+                                onChange={handleChange}
+                                rows="3"
+                                className="mt-1 block w-full bg-gray-700/50 border border-gray-600 rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                required
+                            />
+                        </div>
+
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-300">
                                 Profile Photo
