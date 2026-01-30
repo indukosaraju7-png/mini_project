@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useauthstore } from "../../Store/useauthstore.js";
+import { API_ENDPOINTS } from "../../config.js";
 import toast from 'react-hot-toast';
 
 const Login = () => {
@@ -24,7 +25,7 @@ const Login = () => {
 
         try {
             const response = await fetch(
-  `$/api/users/login`,
+  API_ENDPOINTS.LOGIN,
   {
     method: "POST",
     headers: {
