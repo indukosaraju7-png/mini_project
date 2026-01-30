@@ -21,7 +21,7 @@ function App() {
   const isAdminAuthenticated = localStorage.getItem('adminToken');
 
   return (
-    <Router>
+    <Router basename="/mini_project">
       <Toaster
         position="top-right"
         toastOptions={{
