@@ -1047,15 +1047,11 @@ app.post("/api/members/update-plan", authMiddleware, authorize("member"), async 
         const { planName, amount } = req.body;
         
         // Create Razorpay order
-        let razorpay;
-
-if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
-  razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-  });
-}
-
+        const order = await razorpay.orders.create({
+            amount: amount * 100, // Convert to paise
+            currency: "INR",
+            receipt: "order_" + Date.now(),
+        });
 
         // Update member's plan details
         const member = await Member.findById(req.user.id);
