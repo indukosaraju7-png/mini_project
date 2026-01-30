@@ -48,23 +48,17 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
+    "gh-pages": "^6.3.0",
     "nodemon": "^3.1.11",
     "react-scripts": "latest"
   },
   "browserslist": {
     "production": [
-      "> 0.2%",
-      "not dead",
-      "not op_mini all",
-      "not IE 11",
-      "maintained node versions"
+      "defaults",
+      "not IE 11"
     ],
     "development": [
-      "last 2 Chrome versions",
-      "last 2 Firefox versions",
-      "last 2 Safari versions",
-      "last 2 Edge versions"
+      "last 2 Chrome versions"
     ]
   }
 }
