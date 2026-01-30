@@ -1073,9 +1073,46 @@ app.post("/api/members/update-plan", authMiddleware, authorize("member"), async 
     }
 });
 
+// Debug endpoint - List all members (for testing only)
+app.get("/api/debug/members", async (req, res) => {
+    try {
+        const members = await Member.find({}, { username: 1, email: 1, _id: 1 });
+        res.json(members);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching members" });
+    }
+});
+
 // Connect to Database and Start Server
 const PORT = process.env.PORT || 5000;
 
-connectDB().then(() => {
+// Create test user on startup
+const createTestUser = async () => {
+    try {
+        const existingUser = await Member.findOne({ username: "testmember" });
+        if (!existingUser) {
+            const hashedPassword = await bcrypt.hash("test123", 12);
+            const testMember = new Member({
+                username: "testmember",
+                email: "test@example.com",
+                password: hashedPassword,
+                phone: "1234567890",
+                age: 25,
+                gender: "male",
+                emergencyContact: "9876543210",
+                healthConditions: "None",
+                userType: "member",
+                membership: { status: "inactive" }
+            });
+            await testMember.save();
+            console.log("Test member created: testmember / test123");
+        }
+    } catch (error) {
+        console.log("Test user creation skipped:", error.message);
+    }
+};
+
+connectDB().then(async () => {
+    await createTestUser();
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
