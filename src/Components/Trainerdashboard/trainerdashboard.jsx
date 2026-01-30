@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Users, Calendar, TrendingUp, MessageSquare, Award, Search, Plus, Edit2, X } from 'lucide-react';
+import { API_ENDPOINTS, API_BASE_URL } from "../../config.js";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 import toast from 'react-hot-toast';
 
@@ -59,7 +60,7 @@ const Trainerdashboard = () => {
 
     const fetchMembers = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/trainer/members', {
+            const response = await fetch(API_ENDPOINTS.TRAINER_MEMBERS, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -77,7 +78,7 @@ const Trainerdashboard = () => {
     const fetchCurrentPlans = async (memberId) => {
         try {
             // Fetch current workout plan
-            const workoutResponse = await fetch(`http://localhost:5000/api/workout-plans/${memberId}`, {
+            const workoutResponse = await fetch(API_ENDPOINTS.MEMBER_WORKOUTS(memberId), {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -89,7 +90,7 @@ const Trainerdashboard = () => {
             }
 
             // Fetch current diet plan
-            const dietResponse = await fetch(`http://localhost:5000/api/diet-plans/${memberId}`, {
+            const dietResponse = await fetch(API_ENDPOINTS.MEMBER_DIET(memberId), {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -181,8 +182,8 @@ const Trainerdashboard = () => {
     const handleSubmitWorkoutPlan = async () => {
         try {
             const url = isEditing 
-                ? `http://localhost:5000/api/workout-plans/${currentWorkoutPlan._id}`
-                : 'http://localhost:5000/api/workout-plans';
+                ? `${API_BASE_URL}/api/workout-plans/${currentWorkoutPlan._id}`
+                : `${API_BASE_URL}/api/workout-plans`;
             
             const method = isEditing ? 'PUT' : 'POST';
             
@@ -214,8 +215,8 @@ const Trainerdashboard = () => {
     const handleSubmitDietPlan = async () => {
         try {
             const url = isEditing 
-                ? `http://localhost:5000/api/diet-plans/${currentDietPlan._id}`
-                : 'http://localhost:5000/api/diet-plans';
+                ? `${API_BASE_URL}/api/diet-plans/${currentDietPlan._id}`
+                : `${API_BASE_URL}/api/diet-plans`;
             
             const method = isEditing ? 'PUT' : 'POST';
 

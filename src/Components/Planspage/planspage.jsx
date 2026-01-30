@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check, ArrowRight, Tag } from "lucide-react";
+import { API_ENDPOINTS } from "../../config.js";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 import toast from "react-hot-toast";
 
@@ -22,7 +23,7 @@ const Planspage = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/members/profile", {
+      const res = await fetch(API_ENDPOINTS.MEMBER_PROFILE, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -114,7 +115,7 @@ const Planspage = () => {
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
       // activate membership (demo-safe)
-      await fetch("http://localhost:5000/api/members/activate-membership", {
+      await fetch(API_ENDPOINTS.MEMBER_ACTIVATE_MEMBERSHIP, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

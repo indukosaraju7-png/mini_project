@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Edit, Trash2, Plus, LogOut, Search } from 'lucide-react';
+import { API_ENDPOINTS, API_BASE_URL } from '../../config.js';
 import toast from 'react-hot-toast';
 
 const AdminDashboard = () => {
@@ -22,14 +23,14 @@ const AdminDashboard = () => {
             setLoading(true);
             
             // Fetch members data
-            const membersResponse = await fetch('http://localhost:5000/api/admin/members', {
+            const membersResponse = await fetch(API_ENDPOINTS.ADMIN_MEMBERS, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
                 }
             });
             
             // Fetch trainers data
-            const trainersResponse = await fetch('http://localhost:5000/api/admin/trainers', {
+            const trainersResponse = await fetch(API_ENDPOINTS.ADMIN_TRAINERS, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
                 }
@@ -84,8 +85,8 @@ const AdminDashboard = () => {
         if (window.confirm(`Are you sure you want to delete this ${type}?`)) {
             try {
                 const endpoint = type === 'member' 
-                    ? `http://localhost:5000/api/admin/members/${id}` 
-                    : `http://localhost:5000/api/admin/trainers/${id}`;
+                    ? `${API_BASE_URL}/api/admin/members/${id}` 
+                    : `${API_BASE_URL}/api/admin/trainers/${id}`;
                 
                 const response = await fetch(endpoint, {
                     method: 'DELETE',
@@ -124,8 +125,8 @@ const AdminDashboard = () => {
             try {
                 const isTrainer = activeTab === 'trainers';
                 const endpoint = isTrainer 
-                    ? `http://localhost:5000/api/admin/trainers/${currentUser._id}` 
-                    : `http://localhost:5000/api/admin/members/${currentUser._id}`;
+                    ? `${API_BASE_URL}/api/admin/trainers/${currentUser._id}` 
+                    : `${API_BASE_URL}/api/admin/members/${currentUser._id}`;
                 
                 const response = await fetch(endpoint, {
                     method: 'PUT',

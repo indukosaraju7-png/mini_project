@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from "react-router-dom";
 import { Star, MessageSquare, Search, Edit2, Trash2, CheckCircle, Filter, Clock, Dumbbell, Activity, CreditCard, Package, X, Users, TrendingUp } from 'lucide-react';
+import { API_ENDPOINTS, API_BASE_URL } from "../../config.js";
 import "./styles.css";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 import toast from 'react-hot-toast';
@@ -136,7 +137,7 @@ const MemberDashboard = () => {
         try {
             setLoading(true);
 
-            const response = await fetch('http://localhost:5000/api/members/update-plan', {
+            const response = await fetch(API_ENDPOINTS.MEMBER_UPDATE_PLAN, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -163,7 +164,7 @@ const MemberDashboard = () => {
                 order_id: order.id,
                 handler: async function (response) {
                     try {
-                        const verifyResponse = await fetch('http://localhost:5000/api/verify-payment', {
+                        const verifyResponse = await fetch(API_ENDPOINTS.VERIFY_PAYMENT, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -211,7 +212,7 @@ const MemberDashboard = () => {
 
     const fetchTrainers = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/trainers', {
+            const response = await fetch(API_ENDPOINTS.TRAINERS, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -255,7 +256,7 @@ const MemberDashboard = () => {
 
     const fetchWorkoutPlan = async (memberId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/workout-plans/${memberId}`, {
+            const response = await fetch(API_ENDPOINTS.MEMBER_WORKOUTS(memberId), {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -276,7 +277,7 @@ const MemberDashboard = () => {
 
     const fetchDietPlan = async (memberId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/diet-plans/${memberId}`, {
+            const response = await fetch(API_ENDPOINTS.MEMBER_DIET(memberId), {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -297,7 +298,7 @@ const MemberDashboard = () => {
 
     const handleSelectTrainer = async (trainer) => {
         try {
-            const response = await fetch('http://localhost:5000/api/members/select-trainer', {
+            const response = await fetch(API_ENDPOINTS.MEMBER_SELECT_TRAINER, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

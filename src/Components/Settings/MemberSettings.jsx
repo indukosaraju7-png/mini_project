@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Save, ArrowLeft } from 'lucide-react';
+import { API_ENDPOINTS } from '../../config.js';
 import toast from 'react-hot-toast';
 
 const MemberSettings = () => {
@@ -22,7 +23,7 @@ const MemberSettings = () => {
 
     const fetchProfile = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/members/profile', {
+            const response = await fetch(API_ENDPOINTS.MEMBER_PROFILE, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -53,7 +54,7 @@ const MemberSettings = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/members/profile', {
+            const response = await fetch(API_ENDPOINTS.MEMBER_PROFILE, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

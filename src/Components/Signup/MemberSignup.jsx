@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../../config.js";
 import toast from 'react-hot-toast';
 
 const MemberSignup = () => {
@@ -33,7 +34,7 @@ const MemberSignup = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/api/members/signup", {
+            const response = await fetch(API_ENDPOINTS.MEMBER_SIGNUP, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

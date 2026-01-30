@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Save, ArrowLeft } from 'lucide-react';
+import { API_ENDPOINTS } from '../../config.js';
 import toast from 'react-hot-toast';
 
 const TrainerSettings = () => {
@@ -26,7 +27,7 @@ const TrainerSettings = () => {
 
     const fetchProfile = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/trainers/profile', {
+            const response = await fetch(API_ENDPOINTS.TRAINER_PROFILE, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -57,7 +58,7 @@ const TrainerSettings = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/trainers/profile', {
+            const response = await fetch(API_ENDPOINTS.TRAINER_PROFILE, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
